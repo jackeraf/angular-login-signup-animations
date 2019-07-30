@@ -1,0 +1,99 @@
+<div class="signup-login">
+  <div class="signup-login__main">
+      <div class="signup-login__main__login__header">
+          <img [src]="imageLogoPath" alt="">
+        </div>
+      <div class="signup-login__main__login__content" [hidden]="textDisapear">
+          <div class="signup-login__main__login__content__title">
+              Login
+            </div>
+            <div class="signup-login__main__login__content__text">
+              <p>If you have an account with us please identify</p>
+              
+            </div>
+      </div>
+      <div class="login-signup__main__signup" [hidden]="signupTextDisapear">
+          <div class="login-signup__main__signup__title">
+              Sign up!
+          </div>
+          <div class="login-signup__main__signup__title2">
+            Is easy and fast!
+          </div>
+          <div class="login-signup__main__signup__text">
+              You will enjoy advantages like:
+          </div>
+          <div class="login-signup__main__signup__list">
+            <div class="login-signup__main__signup__list__el1">
+              exclusive offers
+                
+            </div>
+            <div class="login-signup__main__signup__list__el2">
+              Follow your orders
+            </div>
+          </div>
+      </div>
+      
+      <div class="signup-login__main__login" [ngClass]="[movement && init ? 'orange-right' : 'border-radius-init', !movement && init ? 'orange-left' : '']" (click)="move()">
+          <div class="signup-login__main__login__wrapper-button">
+              <button (click)="changeToLogin()" class="signup-login__main__login__wrapper-button__button">
+                {{movement && init ? 'Register' : 'Enter'}}
+              </button>
+            </div>
+          
+        </div>
+        <div class="signup-login__main__signup" [hidden]="signupLoginHide" [ngClass]="[!movement && init ? 'white-right' : '', movement && init ? 'white-left' : '']">
+          <div class="signup-login__main__signup__title">
+              Sign up
+          </div>
+          <div class="signup-login__main__signup__input">
+              <input type="text" name="identity" minlength="9"
+              [(ngModel)]="signupIdentity" #identity="ngModel"
+              placeholder="">
+              <div class="validation-signup-input" *ngIf="identityFieldEmpty && signupIdentity.length === 0">
+                Required field
+              </div>
+              <div class="validation-signup-input" *ngIf="identity.invalid && (identity.dirty || identity.touched)">
+                <div *ngIf="identity.errors.minlength">
+                  Debe tener mínimo 9 carácteres
+                </div>
+              </div>
+          </div>
+          
+          <div class="signup-login__main__signup__wrapper-button">
+            <button (click)="changeToSignUp()" class="signup-login__main__signup__wrapper-button__button">
+               Register  <i *ngIf="loadingSignUp" class="ml-3 icon icon-spinner-black icon-spin"></i>
+            </button>            
+            <div class="invalid-feedback d-block">
+                <div *ngIf="identifiRepeated" class="big">Identificador repetido.</div>
+            </div>
+          </div>
+        </div>
+        <div class="login-signup__main__login" [hidden]="!signupLoginHide" [ngClass]="[!movement && init ? 'white-register-right' : '', movement && init ? 'white-register-left' : '']">
+            <div class="login-signup__main__login__title">
+                Login
+              </div>
+            <div class="login-signup__main__login__content">
+                  <div class="login-signup__main__login__content__input__nif">
+                      <input [(ngModel)]="loginIdentity" type="text" placeholder="">
+                  </div>
+                  <div class="login-signup__main__login__content__input__password">
+                      <input [(ngModel)]="loginPassword" type="password" placeholder="">
+                  </div>
+                  <div class="login-signup__main__login__content__feedback">
+                      <div class="invalid-feedback d-block">
+                          <div *ngIf="loginError" class="big">Identificador o contraseña incorrecta.</div>
+                      </div>
+                  </div>
+            </div>
+            <div class="login-signup__main__login__wrapper-button">   
+                <button (click)="login()" class="login-signup__main__login__wrapper-button__button">
+                   Enter<i *ngIf="loadingLogin" class="ml-3 icon icon-spinner-black icon-spin"></i>
+                </button>
+            </div> 
+            <!-- <div class="login-signup__main__login__forgot-psw" (click)="showModal = !showModal">
+                {{ 'app.login.loginDiv.forgetpassword' | translate }}
+            </div> -->
+        </div>
+  </div>
+  
+</div>
